@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Controle suas receitas e despesas de forma simples.">
+  <title>Meu Controle | Finanças pessoais</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="Meu Controle - início">
+        <span class="brand-icon">M</span><span>meu<span class="brand-light">controle</span></span>
+      </a>
+      <div class="side-label">MENU PRINCIPAL</div>
+      <a class="nav-item active" href="#inicio"><span class="nav-symbol">▦</span> Visão geral</a>
+      <a class="nav-item" href="#transacoes"><span class="nav-symbol">↕</span> Transações</a>
+      <div class="sidebar-bottom">
+        <div class="help-card">
+          <div class="help-icon">✦</div>
+          <strong>Organize seu dinheiro</strong>
+          <p>Pequenos passos ajudam você a cuidar melhor das suas finanças.</p>
+        </div>
+        <span class="side-foot">MEU CONTROLE · 2026</span>
+      </div>
+    </aside>
+
+    <main class="main-content" id="inicio">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">PAINEL FINANCEIRO</p>
+          <h1>Visão geral</h1>
+          <p class="welcome">Acompanhe suas movimentações em um só lugar.</p>
+        </div>
+        <div class="profile"><span class="profile-avatar">U</span><span><strong>Meu perfil</strong><small>Usuário</small></span></div>
+      </header>
+
+      <section class="summary-grid" aria-label="Resumo financeiro">
+        <article class="summary-card balance-card">
+          <div class="card-top"><span>Saldo atual</span><span class="card-icon">◈</span></div>
+          <strong class="amount" id="balance">R$ 0,00</strong>
+          <small>Receitas menos despesas</small>
+        </article>
+        <article class="summary-card">
+          <div class="card-top"><span>Total de receitas</span><span class="card-icon income-icon">↗</span></div>
+          <strong class="amount income-text" id="income-total">R$ 0,00</strong>
+          <small>Entradas cadastradas</small>
+        </article>
+        <article class="summary-card">
+          <div class="card-top"><span>Total de despesas</span><span class="card-icon expense-icon">↘</span></div>
+          <strong class="amount expense-text" id="expense-total">R$ 0,00</strong>
+          <small>Saídas cadastradas</small>
+        </article>
+      </section>
+
+      <section class="content-grid">
+        <section class="panel form-panel" aria-labelledby="form-title">
+          <div class="panel-heading">
+            <div><p class="eyebrow">NOVA MOVIMENTAÇÃO</p><h2 id="form-title">Adicionar transação</h2></div>
+            <span class="heading-mark">＋</span>
+          </div>
+          <form id="transaction-form" novalidate>
+            <div class="field">
+              <label for="description">Descrição</label>
+              <input id="description" name="description" type="text" maxlength="45" placeholder="Ex.: Conta de internet" required>
+              <small class="field-error" id="description-error"></small>
+            </div>
+            <div class="field">
+              <label for="amount">Valor (R$)</label>
+              <div class="input-prefix"><span>R$</span><input id="amount" name="amount" type="number" min="0.01" step="0.01" placeholder="0,00" required></div>
+              <small class="field-error" id="amount-error"></small>
+            </div>
+            <div class="field">
+              <label>Tipo de movimentação</label>
+              <div class="type-options">
+                <label class="type-option selected" id="income-option"><input type="radio" name="type" value="income" checked><span class="option-dot"></span> Receita</label>
+                <label class="type-option" id="expense-option"><input type="radio" name="type" value="expense"><span class="option-dot"></span> Despesa</label>
+              </div>
+            </div>
+            <div class="field">
+              <label for="category">Categoria</label>
+              <select id="category" name="category" required>
+                <option value="">Selecione uma categoria</option>
+                <option>Salário</option><option>Alimentação</option><option>Transporte</option>
+                <option>Moradia</option><option>Lazer</option><option>Estudos</option><option>Saúde</option><option>Outros</option>
+              </select>
+              <small class="field-error" id="category-error"></small>
+            </div>
+            <div class="field">
+              <label for="date">Data</label>
+              <input id="date" name="date" type="date" required>
+              <small class="field-error" id="date-error"></small>
+            </div>
+            <button class="submit-button" type="submit"><span>＋</span> Adicionar movimentação</button>
+            <p class="form-note">Preencha os campos para registrar sua movimentação.</p>
+          </form>
+        </section>
+
+        <section class="panel transactions-panel" id="transacoes" aria-labelledby="transactions-title">
+          <div class="transactions-heading">
+            <div><p class="eyebrow">ACOMPANHAMENTO</p><h2 id="transactions-title">Últimas transações</h2></div>
+            <span class="transaction-count" id="transaction-count">0 registros</span>
+          </div>
+          <div class="filter-row">
+            <label class="sr-only" for="filter">Filtrar transações</label>
+            <select id="filter">
+              <option value="all">Todas</option><option value="income">Receitas</option><option value="expense">Despesas</option>
+            </select>
+            <label class="sr-only" for="search">Buscar transação</label>
+            <div class="search-box"><span>⌕</span><input id="search" type="search" placeholder="Buscar..."></div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>DESCRIÇÃO</th><th>DATA</th><th>VALOR</th><th></th></tr></thead>
+              <tbody id="transaction-list"></tbody>
+            </table>
+            <div class="empty-state" id="empty-state">
+              <span class="empty-icon">↗</span><strong>Nenhuma transação por aqui</strong>
+              <p>Adicione sua primeira receita ou despesa usando o formulário.</p>
+            </div>
+          </div>
+          <p class="list-foot" id="list-foot">Seus registros aparecerão aqui.</p>
+        </section>
+      </section>
+      <footer>Feito para simplificar sua vida financeira. <span>Meu Controle © 2026</span></footer>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
